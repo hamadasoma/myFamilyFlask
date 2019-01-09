@@ -25,12 +25,13 @@ def getData(member):
 @app.route("/addmember", methods = ['GET', 'POST'])
 def addMember():
     if request.method == 'POST':
-        nameVar = request.form.get('nameVar')
-        genderVar = request.form.get('genderVar')
+        nameVar = request.form.get('nameVar').title()
+        genderVar = request.form.get('genderVar').title()
         ageVar = request.form.get('ageVar')
         familyDict[nameVar] = {'gender' : genderVar, 'age' : ageVar}
         return(redirect(url_for('getData', member = nameVar)))
-    return(render_template('createForm.html'))
+    else:
+        return(render_template('createForm.html'))
 
 
 if __name__ == '__main__' :
